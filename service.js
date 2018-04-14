@@ -45,4 +45,4 @@ app.use(Router.post('/user', async ctx => {
     ctx.response.body = await mysql.addInfo(ctx.request.body);
 }));
 
-app.listen(3000);
+app.listen(80);
