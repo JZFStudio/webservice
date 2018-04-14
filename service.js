@@ -34,7 +34,7 @@ app.use(Router.get('/', async ctx => {
     ctx.response.body = fs.createReadStream('./index.html');
 }));
 
-app.use(Router.get('/data', async ctx => {
+/*app.use(Router.get('/data', async ctx => {
     let data = await mysql.getMySql();
     console.log(data);
     ctx.response.body = data;
@@ -43,7 +43,7 @@ app.use(Router.get('/data', async ctx => {
 app.use(Router.post('/user', async ctx => {
     ctx.request.body.sex = ctx.request.body.sex === 'man' ? 1 : 0;
     ctx.response.body = await mysql.addInfo(ctx.request.body);
-}));
+}));*/
 
 app.listen(80, function () {
     console.log('listen 80');
