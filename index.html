@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <img data-src="./static/logo.png" src="" alt="">
+    <button>加载图片</button>
+    <input type="text" placeholder="name" value="jack">
+    <input type="number" placeholder="age" value="12">
+    <input type="text" placeholder="sex" value="man">
+    <button class="submit">submit</button>
+    <script>
+        $('body').ready(function () {
+            $("button:not(.submit)").click(function () {
+                $('img').attr('src', $('img').attr('data-src'));
+                $.ajax('/data', {
+                    method: 'GET',
+                    async: true,
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            });
+            $("button.submit").click(function () {
+                let userName = $("input[placeholder='name']").val();
+                let userAge = $("input[placeholder='age']").val();
+                let userSex = $("input[placeholder='sex']").val();
+                let userInfo = {
+                    name: userName,
+                    age: userAge,
+                    sex: userSex
+                };
+                $.ajax('/user', {
+                    method: 'POST',
+                    async: true,
+                    cache: false,
+                    dataType: 'json',
+                    data: userInfo,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>
